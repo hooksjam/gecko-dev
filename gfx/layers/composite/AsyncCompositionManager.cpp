@@ -288,21 +288,21 @@ static LayerPoint GetLayerFixedMarginsOffset(
   // Because fixed layer margins are stored relative to the root scrollable
   // layer, we can just take the difference between these values.
   LayerPoint translation;
-  int32_t sides = aLayer->GetFixedPositionSides();
+  SideBits sides = aLayer->GetFixedPositionSides();
 
-  if ((sides & eSideBitsLeftRight) == eSideBitsLeftRight) {
+  if ((sides & SideBits::eLeftRight) == SideBits::eLeftRight) {
     translation.x += (aFixedLayerMargins.left - aFixedLayerMargins.right) / 2;
-  } else if (sides & eSideBitsRight) {
+  } else if (sides & SideBits::eRight) {
     translation.x -= aFixedLayerMargins.right;
-  } else if (sides & eSideBitsLeft) {
+  } else if (sides & SideBits::eLeft) {
     translation.x += aFixedLayerMargins.left;
   }
 
-  if ((sides & eSideBitsTopBottom) == eSideBitsTopBottom) {
+  if ((sides & SideBits::eTopBottom) == SideBits::eTopBottom) {
     translation.y += (aFixedLayerMargins.top - aFixedLayerMargins.bottom) / 2;
-  } else if (sides & eSideBitsBottom) {
+  } else if (sides & SideBits::eBottom) {
     translation.y -= aFixedLayerMargins.bottom;
-  } else if (sides & eSideBitsTop) {
+  } else if (sides & SideBits::eTop) {
     translation.y += aFixedLayerMargins.top;
   }
 
